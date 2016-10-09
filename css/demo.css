@@ -1,0 +1,27 @@
+.body{
+    margin: 0px;
+}
+
+h2 {
+    font-size: 42px;
+    line-height: 20px;
+    margin: 4px 0;
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+.calendar {
+    text-align: center;
+}
+
+.calendar h2{
+    text-transform: uppercase;
+}
+
+.calendar thead {
+    font-weight: 600;
+    text-transform: uppercase;
+}
