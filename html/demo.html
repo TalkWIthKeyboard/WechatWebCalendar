@@ -13,28 +13,34 @@
 </head>
 
 <body ontouchstart>
+    <div class="calendar">
+        <header>
+            <h2 class="month"></h2>
+            <img class="btn-prev" src="/calendar/img/left.png">
+            <img class="btn-next" src="/calendar/img/right.png">
+        </header>
+        <table>
+            <thead class="event-days">
+                <tr></tr>
+            </thead>
+            <tbody class="event-calendar">
+                <tr class="1"></tr>
+                <tr class="2"></tr>
+                <tr class="3"></tr>
+                <tr class="4"></tr>
+                <tr class="5"></tr>
+                <tr class="6"></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="event">
+        <div class="event-header">
+            <h3 class="dayInfo"></h3>
+            <p class="activeInfo">1个促销活动</p>
+        </div>
+        <div class="event-list"></div>
+    </div>
 
-<div class="calendar">
-    <header>
-        <h2 class="month"></h2>
-        <img class="btn-prev" src="/calendar/img/left.png">
-        <img class="btn-next" src="/calendar/img/right.png">
-    </header>
-    <table>
-        <thead class="event-days">
-            <tr></tr>
-        </thead>
-        <tbody class="event-calendar">
-            <tr class="1"></tr>
-            <tr class="2"></tr>
-            <tr class="3"></tr>
-            <tr class="4"></tr>
-            <tr class="5"></tr>
-            <tr class="6"></tr>
-        </tbody>
-    </table>
-
-</div>
     <!-- body 最后 -->
     <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/jquery-weui/0.8.0/js/jquery-weui.min.js"></script>

@@ -2,8 +2,49 @@
  * Created by CoderSong on 16/10/7.
  */
 $(function () {
-    startCalendar()
+    startEvent();
+    startCalendar();
+
+    var weekName = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+    $('tbody.event-calendar tr td').click(function () {
+        var day = $(this).attr('date-day');
+        var month = $(this).attr('date-month');
+        var year = $(this).attr('date-year');
+        var date = new Date(year,month,day);
+        $('.dayInfo').text(weekName[date.getDay()] + '  ' + day);
+        // $('.activeInfo').text();
+    });
+
+    startEventHeader(weekName)
 });
+
+startEventHeader = function (weekName) {
+
+    var d = new Date();
+    var dayNumber = d.getDate();
+    $('.dayInfo').text(weekName[d.getDay()] + '  ' + dayNumber);
+};
+
+startEvent = function () {
+    $.ajax({
+        url: '/calendar/data/events.json',
+        type: 'GET'
+    }).done(function (data) {
+        var event = data.events;
+        for (var i = 0; i < event.length; i++){
+            $('.event-list').append(
+                '<div class="weui_panel"> \
+                    <div class="weui_panel_bd"> \
+                        <div class="weui_media_box weui_media_text"> \
+                            <h4 class="weui_media_title">' + event[i].time + '</h4> \
+                            <p class="weui_media_desc">' + event[i].description + '</p> \
+                        </div> \
+                    </div> \
+                </div>'
+            )
+        }
+    })
+};
 
 startCalendar = function() {
     //获得现在的日期
@@ -11,7 +52,7 @@ startCalendar = function() {
     var dayNumber = d.getDate();
     var monthNumber = d.getMonth() + 1;
     var yearNumber = d.getFullYear();
-    setMonth(monthNumber);
+    setMonth(yearNumber,monthNumber);
 
     //左翻按钮事件
     $('.btn-prev').click(function () {
@@ -20,10 +61,10 @@ startCalendar = function() {
             $('.month').attr('data-month','13');
             var monthNumber = 13;
             yearNumber = yearNumber - 1;
-            setMonth(parseInt(monthNumber) - 1);
+            setMonth(yearNumber,parseInt(monthNumber) - 1);
         }
         else{
-            setMonth(parseInt(monthNumber) - 1);
+            setMonth(yearNumber,parseInt(monthNumber) - 1);
         }
     });
 
@@ -34,10 +75,10 @@ startCalendar = function() {
             $('.month').attr('data-month', '0');
             var monthNumber = 0;
             yearNumber = yearNumber + 1;
-            setMonth(parseInt(monthNumber) + 1);
+            setMonth(yearNumber,parseInt(monthNumber) + 1);
         }
         else {
-            setMonth(parseInt(monthNumber) + 1);
+            setMonth(yearNumber,parseInt(monthNumber) + 1);
         }
     });
 
@@ -47,13 +88,11 @@ startCalendar = function() {
     }
 
     //通过月数来填数据
-    function setMonth(monthNumber) {
+    function setMonth(yearNumber,monthNumber) {
         $('.month').text(yearNumber + '年 ' + getWeekWord(monthNumber));
         $('.month').attr('data-month', monthNumber);
         setDay(monthNumber)
     };
-
-
 
     function setDay(monthNumber) {
 
@@ -118,19 +157,19 @@ startCalendar = function() {
         function printDay(monthNumber) {
             var days = getAllDays(monthNumber - 1, yearNumber);
             for (var index = 0 ; index < days.length; index++){
-                var each = days[index];
+                var each = new Date(days[index]);
                 if (index < 7) {
-                    $('tbody.event-calendar tr.1').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '"class="first-line">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.1').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getFullYear() + '"class="first-line">' + each.getDate() + '</td>');
                 } else if (index < 14) {
-                    $('tbody.event-calendar tr.2').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.2').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getFullYear() + '">' + each.getDate() + '</td>');
                 } else if (index < 21) {
-                    $('tbody.event-calendar tr.3').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.3').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getFullYear() + '">' + each.getDate() + '</td>');
                 } else if (index < 28) {
-                    $('tbody.event-calendar tr.4').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.4').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getFullYear() + '">' + each.getDate() + '</td>');
                 } else if (index < 35) {
-                    $('tbody.event-calendar tr.5').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.5').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getFullYear() + '">' + each.getDate() + '</td>');
                 } else if (index < 42){
-                    $('tbody.event-calendar tr.6').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.6').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getFullYear() + '"class="last-line">' + each.getDate() + '</td>');
                 }
             }
 
