@@ -42,13 +42,13 @@ startCalendar = function() {
     });
 
     function getWeekWord(monthNumber) {
-        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
         return months[monthNumber - 1];
     }
 
     //通过月数来填数据
     function setMonth(monthNumber) {
-        $('.month').text(getWeekWord(monthNumber) + ' ' + yearNumber);
+        $('.month').text(yearNumber + '年 ' + getWeekWord(monthNumber));
         $('.month').attr('data-month', monthNumber);
         setDay(monthNumber)
     };
@@ -120,7 +120,7 @@ startCalendar = function() {
             for (var index = 0 ; index < days.length; index++){
                 var each = days[index];
                 if (index < 7) {
-                    $('tbody.event-calendar tr.1').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
+                    $('tbody.event-calendar tr.1').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '"class="first-line">' + each.getDate() + '</td>');
                 } else if (index < 14) {
                     $('tbody.event-calendar tr.2').append('<td date-month="' + each.getMonth() + '" date-day="' + each.getDate() + '" date-year="' + each.getYear() + '">' + each.getDate() + '</td>');
                 } else if (index < 21) {

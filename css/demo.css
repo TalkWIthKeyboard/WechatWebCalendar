@@ -5,7 +5,18 @@
 table {
     border-spacing: 0;
     width: 100%;
-    margin-top: 20px;
+}
+
+header{
+    background-color: #f1f1f1;
+}
+
+thead{
+    background-color: #f1f1f1
+}
+
+thead td{
+    border-bottom: 2px solid #eaeaea;
 }
 
 tbody tr td{
@@ -14,8 +25,16 @@ tbody tr td{
     height: 40px;
 }
 
+.first-line{
+    border-top: 0px;
+}
+
+.event-calendar tr td:hover{
+    background-color: #0089A7;
+}
+
 .current-day {
-    border: 2px solid #9dc5c9;
+    border: 2px solid #0089A7;
 }
 
 .calendar {
@@ -24,6 +43,8 @@ tbody tr td{
 
 .calendar h2{
     text-transform: uppercase;
+    border-top: 8px solid #f1f1f1;
+    color: #0089A7;
 }
 
 .calendar thead{
@@ -36,10 +57,11 @@ tbody tr td{
     margin: -16px;
     position: absolute;
     width: 32px;
+    top: 4%;
 }
 
 .btn-prev {
-    left: 30px;
+    left: 35px;
 }
 
 .btn-next {
